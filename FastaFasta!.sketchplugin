@@ -1,0 +1,75 @@
+function createSelect(msg, items, selectedItemIndex){
+  selectedItemIndex = selectedItemIndex || 0
+
+  var accessory = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0,0,200,25)]
+  [accessory addItemsWithTitles:items] 
+  [accessory selectItemAtIndex:selectedItemIndex]
+
+  var alert = [[NSAlert alloc] init]
+  [alert setMessageText:msg]
+  [alert addButtonWithTitle:'OK']
+  [alert addButtonWithTitle:'Cancel']
+  [alert setInformativeText: "Choose value for timer"]
+  [alert setAccessoryView:accessory]
+
+  var responseCode = [alert runModal]
+  var sel = [accessory indexOfSelectedItem]
+
+  btnSelect(alert, responseCode, sel)
+
+  return [sel]
+}
+
+var doc = context.document
+var minutes = ['5 minutes', '10 minutes', '20 minutes', '30 minutes', '40 minutes']
+var options = ['😱 ' + minutes[0], '💪 ' + minutes[1], '👌 ' + minutes[2], '👍 ' + minutes[3], '🐢 ' + minutes[4]]
+var choice = createSelect('How fast you are?',options, 2)
+var timeOverVal
+
+coscript.setShouldKeepAround(true)
+
+function timeOver(msg, infoMsg) {
+  var EndTimeAlert = [[NSAlert alloc] init]
+  EndTimeAlert.setMessageText(msg);
+  EndTimeAlert.setInformativeText(infoMsg);
+  [EndTimeAlert runModal];
+}
+
+function btnSelect(alert, responseCode, sel) {
+  if (responseCode == "1000") {
+    if(sel == 0){
+      timeOverVal = "5 minutes"
+      doc.displayMessage('5 minutes! Wow!');
+      coscript.scheduleWithInterval_jsFunction(300, onInterval);
+    }
+    else if(sel == 1){
+      timeOverVal = "10 minutes"
+      doc.displayMessage('10 minutes! Nice)');
+      coscript.scheduleWithInterval_jsFunction(600, onInterval);
+    }
+    else if(sel == 2){
+      timeOverVal = "20 minutes"
+      doc.displayMessage('20 minutes! Go!Go!Go!');
+      coscript.scheduleWithInterval_jsFunction(1200, onInterval);
+    }
+    else if(sel == 3){
+      timeOverVal = "30 minutes! Action!"
+      doc.displayMessage('30 minutes');
+      coscript.scheduleWithInterval_jsFunction(1800, onInterval);
+    }
+    else if(sel == 4){
+      timeOverVal = "40 minutes"
+      doc.displayMessage('40 minutes... you serious?');
+      coscript.scheduleWithInterval_jsFunction(2400, onInterval);
+    }
+  }
+  else if(responseCode == "1001") {
+    doc.displayMessage('Not now?... okay...');
+  }
+}
+
+function onInterval () {
+  timeOver( timeOverVal + " is Over!", "sowwy :(")
+}
+
+// version 1.1
