@@ -10,7 +10,7 @@ Just duble-click on downloaded plugin)
 
 Select Fasta!Fasta! from plugin list and choose your timer
 
-[Promo page](https://readymag.com/DG/FastaFasta/)
+[Promo page](https://readymag.com/LaptevPavel/FastaFasta/)
 
 ![screen1](https://dl.dropboxusercontent.com/s/9svmh60esy1hfnv/screen1.png?dl=0)
 ![screen2](https://dl.dropboxusercontent.com/s/6diqlig0950wwhn/screen2.png?dl=0)
